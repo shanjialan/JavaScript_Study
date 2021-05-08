@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKY FULL OF STARS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            overflow: hidden;
+            position: absolute;
+        }
+        
+        span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: url("星星.png") no-repeat;
+            background-size: 30px;
+            position: relative;
+            animation: flash 1s alternate infinite;
+        }
+        
+        @keyframes flash {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        span:hover {
+            transform: scale(3, 3) rotate(180deg) !important;
+            transition: all 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <span></span> -->
+    <script>
+        // let oSpan = document.getElementsByTagName("span");
+        //获取屏幕宽高
+        let {
+            width,
+            height
+        } = getScreen();
+        //动态创建小星星
+        for (var i = 1; i <= 200; i++) {
+            let oSpan = document.createElement("span");
+            document.body.appendChild(oSpan);
+            //随机生成位置
+            let x = Math.random() * width;
+            let y = Math.random() * height;
+            //赋予位置
+            oSpan.style.left = x + "px";
+            oSpan.style.top = y + "px";
+            let scale = Math.random() * 2;
+            oSpan.style.transform = `scale(${scale}, ${scale})`;
+            let rate = Math.random() * 2;
+            oSpan.style.animationDelay = rate + "s";
+        }
+
+        function getScreen() {
+            let width, height;
+            if (window.innerWidth) {
+                width = window.innerWidth;
+                height = window.innerHeight;
+            } else if (document.compatMode === "BackCompat") {
+                width = document.body.clientWidth;
+                height = document.body.clientHeight;
+            } else {
+                width = document.documentElement.clientWidth;
+                height = document.documentElement.clientHeight;
+            }
+            return {
+                width: width,
+                height: height
+            }
+        }
+    </script>
+</body>
+
+</html>
